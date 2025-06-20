@@ -1,12 +1,54 @@
+"use client";
 import Image from "next/image";
 import davidImg from "../public/david.jpg";
 import { Orbitron } from "next/font/google";
+import "../theme/theme"
+import { Pagination, Box } from "@mui/material";
+import { useState, useEffect } from "react";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
 });
 
 export default function Home() {
+  const [currentProject, setCurrentProject] = useState(1);
+  const projects = [
+    {
+      id: 1,
+      title: "MindCast",
+      emoji: "🧠",
+      description: "MindCast este o platformă inovatoare pentru Biblioteca de Idei și Conversații Temporare. Utilizatorii pot crea, partaja și explora playlisturi tematice de idei, iar discuțiile se desfășoară în chat-uri efemere, care dispar după 24h.",
+      features: [
+        "🤖 Sugestii inteligente AI: Recomandări personalizate de playlisturi, asemănător muzicii pe Spotify.",
+        "🔒 Anonimat controlat: Opțiuni pentru conversații private sau publice, pentru libertate și siguranță."
+      ],
+      technologies: [
+        "Frontend: React — UI fluidă și animații performante.",
+        "Backend: Node.js + ExpressJS — chat în timp real.",
+        "Bază de date: MongoDB — stocare citate și cărți."
+      ],
+      demoLink: "https://mindcast.netlify.app"
+    },
+    {
+      id: 2,
+      title: "Etnogeneza Românească",
+      emoji: "📚",
+      description: "Etnogeneza românească proces istoric de formare a poporului român și a limbii române",
+      features: [
+        "🗺️ Prezentare interactivă a etapelor etnogenezei românești",
+        "📜 Linie cronologică cu evenimente istorice marcante",
+        "🧠 Quiz-uri rapide pentru testarea cunoștințelor",
+        "🎧 Secțiune multimedia cu video/audio explicative",
+        "🔍 Glosar de termeni istorici importanți",
+        "🌍 Hartă interactivă a spațiului carpato-danubiano-pontic"
+],
+      technologies: [
+        "Frontend: React — UI fluidă și animații performante.",
+        "Styles: TailwindCSS — design modern și responsive."
+      ],
+      demoLink: "https://davidstef77.github.io/istorie1/"
+    }
+  ]
   return (
     <main className="flex flex-col min-h-screen bg-black text-white px-4 py-20 space-y-40">
       {/* HERO SECTION */}
@@ -46,67 +88,94 @@ export default function Home() {
   </div>
 
   {/* PROJECTS */}
-  <div className="md:w-1/2 text-center md:text-left">
-    <h2 className={`text-4xl font-bold mb-6 ${orbitron.className}`}>
-      <span className="text-[#511f3a]">My</span> Projects
-    </h2>
+{/* PROJECTS */}
+<div className="md:w-1/2 text-center font-bold md:text-left">
+  <h2 className={`text-4xl font-bold mb-6 ${orbitron.className}`}>
+    <span className="text-[#511f3a]">My</span> Projects
+  </h2>
 
-    <div className="grid gap-6 sm:grid-cols-1">
-      {/* MindCast Project */}
-      <div className=" p-8 rounded-3xl shadow-[0_0_25px_rgba(81,31,58,0.6)]  space-y-6 max-w-lg ">
-  {/* Titlu */}
-  <div className="flex items-center gap-3 mx-auto">
-    <span className="text-3xl">🧠</span>
-    <h3 className="text-3xl font-semibold text-white">MindCast</h3>
+  <div className="grid gap-6 sm:grid-cols-1">
+    {projects.map((project) => {
+      if (project.id !== currentProject) return null;
+      return (
+        <div key={project.id} className="p-8 rounded-3xl shadow-[0_0_25px_rgba(81,31,58,0.6)] space-y-6 max-w-lg">
+          {/* Titlu */}
+          <div className="flex items-center gap-3 mx-auto">
+            <span className="text-3xl">{project.emoji}</span>
+            <h3 className="text-3xl font-semibold text-white">{project.title}</h3>
+          </div>
+
+          {/* Descriere scurtă */}
+          <p className="text-gray-300 text-sm font-bold leading-relaxed">
+            {project.description}
+          </p>
+
+          {/* Funcționalități principale */}
+          <div>
+            <h4 className="text-[#511f3a] font-semibold mb-2">Funcționalități principale</h4>
+            <ul className="text-gray-400 text-sm list-disc list-inside space-y-1">
+              {project.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tehnologii */}
+          <div>
+            <h4 className="text-[#511f3a] font-semibold mb-2">🛠️ Tehnologii folosite</h4>
+            <ul className="text-gray-400 text-sm list-disc list-inside space-y-1">
+              {project.technologies.map((tech, index) => (
+                <li key={index}>{tech}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Buton demo live */}
+          <div className="mt-4">
+            <a
+              href={project.demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#511f3a] hover:bg-[#72214f] text-white text-sm px-6 py-3 rounded-full transition-all font-medium"
+            >
+              🌐 Demo Live
+            </a>
+          </div>
+          
+<Box sx={{ display: "flex" , justifyContent: "center" , mt: 2 }}>
+  <Pagination
+    count={projects.length}
+    page={currentProject}
+    onChange={(event, value) => setCurrentProject(value)}
+    variant="outlined"
+    shape="rounded"
+    sx={{
+      "& .MuiPaginationItem-root": {
+        color: "white",
+        borderColor: "gray",
+      },
+      "& .Mui-selected": {
+        backgroundColor: "#111",
+        color: "white",
+        borderColor: "gray",
+      },
+    }}
+  />
+</Box>
+        </div>
+      );
+      
+    })}
+    
   </div>
 
-  {/* Descriere scurtă */}
-  <p className="text-gray-300 text-sm leading-relaxed">
-    MindCast este o platformă inovatoare pentru Biblioteca de Idei și Conversații Temporare. Utilizatorii pot crea, partaja și explora playlisturi tematice de idei, iar discuțiile se desfășoară în chat-uri efemere, care dispar după 24h.
-  </p>
 
-  {/* Secțiunea "Descriere" */}
-  <div>
-    <h4 className="text-[#511f3a] font-semibold mb-1">Descriere</h4>
-    <p className="text-gray-400 text-sm leading-relaxed">
-      MindCast permite utilizatorilor să construiască colecții tematice de idei — citate, articole, concepte sau întrebări filosofice. Fiecare playlist este un spațiu colaborativ cu discuții temporare, ce încurajează schimbul spontan și inspirația continuă.
-    </p>
-  </div>
 
-  {/* Funcționalități principale */}
-  <div>
-    <h4 className="text-[#511f3a] font-semibold mb-2">Funcționalități principale</h4>
-    <ul className="text-gray-400 text-sm list-disc list-inside space-y-1">
-      <li>🤖 Sugestii inteligente AI: Recomandări personalizate de playlisturi, asemănător muzicii pe Spotify.</li>
-      <li>🔒 Anonimat controlat: Opțiuni pentru conversații private sau publice, pentru libertate și siguranță.</li>
-    </ul>
-  </div>
-
-  {/* Tehnologii */}
-  <div>
-    <h4 className="text-[#511f3a] font-semibold mb-2">🛠️ Tehnologii folosite</h4>
-    <ul className="text-gray-400 text-sm list-disc list-inside space-y-1">
-      <li><strong>Frontend:</strong> React — UI fluidă și animații performante.</li>
-      <li><strong>Backend:</strong> Node.js + ExpressJS — chat în timp real.</li>
-      <li><strong>Bază de date:</strong> MongoDB — stocare citate și cărți.</li>
-    </ul>
-  </div>
-
-  {/* Buton demo live */}
-  <div className="mt-4">
-    <a
-      href="https://mindcast.netlify.app"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-2 bg-[#511f3a] hover:bg-[#72214f] text-white text-sm px-6 py-3 rounded-full transition-all font-medium"
-    >
-      🌐 Demo Live
-    </a>
-  </div>
 </div>
-</div>
 
-  </div>
+
+
+
 </section>
 
       {/* CONTACT */}
