@@ -21,7 +21,7 @@ export default function Home() {
       id: 1,
       title: "MindCast",
       emoji: "🧠",
-      description: "MindCast este o platformă inovatoare pentru Biblioteca de Idei și Conversații Temporare. Utilizatorii pot crea, partaja și explora playlisturi tematice de idei, iar discuțiile se desfășoară în chat-uri efemere, care dispar după 24h.",
+      description: "MindCast este o platformă inovatoare pentru Biblioteca de Idei și Conversații Temporare",
       features: [
         "🤖 Sugestii inteligente AI: Recomandări personalizate de playlisturi, asemănător muzicii pe Spotify.",
         "🔒 Anonimat controlat: Opțiuni pentru conversații private sau publice, pentru libertate și siguranță."
@@ -140,12 +140,9 @@ export default function Home() {
           </h1>
           <p className={`text-xl sm:text-2xl text-gray-700 mt-6 max-w-3xl mx-auto md:mx-0 leading-relaxed
                         dark:text-gray-300`}>
-            💻 Dezvoltator Full-stack pasionat de crearea de experiențe digitale curate, funcționale și scalabile.
+            💻 Dezvoltator Full-stack pasionat de crearea de experiențe digitale, funcționale și scalabile.
           </p>
-          <p className={`text-xl sm:text-2xl text-gray-700 mt-4 max-w-3xl mx-auto md:mx-0 leading-relaxed
-                        dark:text-gray-300`}>
-            ⚙️ Mă concentrez pe Next.js, TailwindCSS, MongoDB & instrumente web moderne.
-          </p>
+          
           <div className="mt-10">
             <a
               href="#projects"
@@ -168,10 +165,10 @@ export default function Home() {
             Despre <span className="text-black dark:text-white">Mine</span>
           </h2>
           <p className={`text-lg text-gray-700 leading-relaxed dark:text-gray-300`}>
-            Sunt un dezvoltator dedicat, cu o pasiune pentru cod curat și interfețe intuitive. Îmi place să rezolv probleme complexe și să transform ideile în produse reale. Când nu codez, explorez tehnologii noi.
+            Sunt un dezvoltator dedicat, cu o pasiune pentru cod și interfețe intuitive. 
           </p>
           <p className={`text-lg text-gray-700 leading-relaxed mt-4 dark:text-gray-300`}>
-            Cred cu tărie în învățarea continuă și în crearea de soluții care nu doar funcționează, ci și aduc valoare reală utilizatorilor. Fiecare proiect este o oportunitate de a învăța și de a mă depăși.
+            Cred cu tărie în învățarea continuă. Fiecare proiect este o oportunitate de a învăța și de a mă depăși.
           </p>
         </div>
 
