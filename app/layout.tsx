@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const montserrat = Montserrat({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "David's Portfolio",
-
+  title: "David Stef - Full-Stack Developer",
+  description: "Portfolio of David Stefan, a passionate full-stack developer creating functional and scalable digital experiences.",
 };
 
 export default function RootLayout({
@@ -25,12 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      
-      <body
-        className={`${geistSans.variable} ${montserrat.variable} antialiased`}
-      >
-        <Navbar />
-        {children}
+      <body className={`${inter.className} antialiased bg-black text-white`}>
+        <LanguageProvider>
+          <Navbar />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
