@@ -54,9 +54,7 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
           >
             <Home className="w-7 h-7 text-blue-400 transition-colors duration-300 group-hover:text-cyan-400" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              David
-            </span>
+           
           </motion.a>
 
           {/* Desktop Navigation */}
