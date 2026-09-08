@@ -2,22 +2,68 @@
 import Image from "next/image";
 import davidImg from "../public/david.jpg";
 import { Inter, Space_Grotesk } from "next/font/google";
-import { useState } from "react";
-import { FaGithub, FaEnvelope, FaLink, FaPhone, FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { FaGithub, FaEnvelope, FaLink, FaPhone } from 'react-icons/fa';
 import { useLanguage } from "../contexts/LanguageContext";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState(0);
   const { t, language } = useLanguage();
-  
+  const aboutRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress: aboutScrollProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "end start"]
+  });
+
+  const traverseX1 = useTransform(aboutScrollProgress, [0, 1], ["-80%", "180%"]);
+  const traverseX2 = useTransform(aboutScrollProgress, [0, 1], ["180%", "-80%"]);
+  const traverseScale = useTransform(aboutScrollProgress, [0, 0.5, 1], [0.6, 1.2, 0.6]);
+  const traverseRotate = useTransform(aboutScrollProgress, [0, 1], [0, 180]);
+
+  const projectsRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: projectsProgress } = useScroll({
+    target: projectsRef,
+    offset: ["start start", "end end"]
+  });
+
+  const card0Y = useTransform(projectsProgress, [0, 0.05], ["0%", "0%"]);
+  const card0Scale = useTransform(projectsProgress, [0.1, 0.3], [1, 0.92]);
+  const card0Opacity = useTransform(projectsProgress, [0.1, 0.3], [1, 0.4]);
+
+  const card1Y = useTransform(projectsProgress, [0.1, 0.3], ["100%", "0%"]);
+  const card1Scale = useTransform(projectsProgress, [0.35, 0.55], [1, 0.92]);
+  const card1Opacity = useTransform(projectsProgress, [0.35, 0.55], [1, 0.4]);
+
+  const card2Y = useTransform(projectsProgress, [0.35, 0.55], ["100%", "0%"]);
+  const card2Scale = useTransform(projectsProgress, [0.6, 0.8], [1, 0.92]);
+  const card2Opacity = useTransform(projectsProgress, [0.6, 0.8], [1, 0.4]);
+
+  const card3Y = useTransform(projectsProgress, [0.6, 0.8], ["100%", "0%"]);
+  const card3Scale = useTransform(projectsProgress, [0.8, 1], [1, 1]);
+  const card3Opacity = useTransform(projectsProgress, [0.8, 1], [1, 1]);
+
+  const cardTransforms = [
+    { y: card0Y, scale: card0Scale, opacity: card0Opacity },
+    { y: card1Y, scale: card1Scale, opacity: card1Opacity },
+    { y: card2Y, scale: card2Scale, opacity: card2Opacity },
+    { y: card3Y, scale: card3Scale, opacity: card3Opacity }
+  ];
+
   const projects = [
     {
       id: 1,
       title: "MindCast",
       emoji: "🧠",
+      appleEmoji: "https://em-content.zobj.net/source/apple/391/brain_1f9e0.png",
+      cardGradient: "from-[#0d1127] via-[#0f172a] to-[#191638]",
+      glow: "from-indigo-500/30 via-blue-500/25 to-purple-600/25",
+      border: "border-indigo-500/30",
+      accentGradient: "from-indigo-500 via-blue-500 to-cyan-400",
+      badgeStyle: "bg-indigo-500/10 border-indigo-400/30 text-indigo-200",
       description: {
         en: "An innovative platform for Ideas Library and Temporary Conversations",
         ro: "O platformă inovatoare pentru Biblioteca de Idei și Conversații Temporare"
@@ -40,6 +86,12 @@ export default function Home() {
       id: 2,
       title: "Romanian Ethnogenesis",
       emoji: "📚",
+      appleEmoji: "https://em-content.zobj.net/source/apple/391/books_1f4da.png",
+      cardGradient: "from-[#1a120b] via-[#0f172a] to-[#26150c]",
+      glow: "from-amber-500/30 via-orange-500/25 to-yellow-600/20",
+      border: "border-amber-500/30",
+      accentGradient: "from-amber-500 via-orange-500 to-yellow-400",
+      badgeStyle: "bg-amber-500/10 border-amber-400/30 text-amber-200",
       description: {
         en: "Interactive historical presentation of Romanian people and language formation",
         ro: "Prezentare istorică interactivă a formării poporului și limbii române"
@@ -62,6 +114,12 @@ export default function Home() {
       id: 3,
       title: "News Application",
       emoji: "📰",
+      appleEmoji: "https://em-content.zobj.net/source/apple/391/newspaper_1f4f0.png",
+      cardGradient: "from-[#081919] via-[#0f172a] to-[#062c2b]",
+      glow: "from-teal-500/30 via-cyan-500/25 to-emerald-600/20",
+      border: "border-teal-500/30",
+      accentGradient: "from-teal-400 via-cyan-400 to-emerald-400",
+      badgeStyle: "bg-teal-500/10 border-teal-400/30 text-teal-200",
       description: {
         en: "A complete news application with pagination, categories and breaking news",
         ro: "O aplicație completă de știri cu paginare, categorii și știri de ultimă oră"
@@ -79,199 +137,260 @@ export default function Home() {
       technologies: ["Next.js", "TailwindCSS", "Node.js"],
       demoLink: "https://news-application-virid.vercel.app/",
       githubLink: "https://github.com/davidstef77/"
+    },
+    {
+      id: 4,
+      title: "MathMind",
+      emoji: "🧮",
+      appleEmoji: "https://em-content.zobj.net/source/apple/391/abacus_1f9ee.png",
+      cardGradient: "from-[#1c0c2a] via-[#0f172a] to-[#270e38]",
+      glow: "from-fuchsia-500/30 via-purple-500/25 to-pink-600/20",
+      border: "border-fuchsia-500/30",
+      accentGradient: "from-fuchsia-500 via-purple-500 to-pink-400",
+      badgeStyle: "bg-fuchsia-500/10 border-fuchsia-400/30 text-fuchsia-200",
+      description: {
+        en: "Upload a photo of your problem (math, physics, CS, or chemistry) and get clear explanations and guidance from our AI chatbot to help you solve it on your own.",
+        ro: "Încarci o fotografie cu problema și îi explici chatbotului ce nu înțelegi. Acesta îți oferă rapid explicații clare, formule și îndrumare."
+      },
+      features: {
+        en: [
+          "📸 Photo Upload: Instantly capture and upload your exercise",
+          "🤖 AI Tutor: Get step-by-step explanations, formulas, and guidance"
+        ],
+        ro: [
+          "📸 Încărcare Foto: Capturezi și încarci rapid exercițiul",
+          "🤖 Tutor AI: Primești explicații pas cu pas, formule și îndrumare"
+        ]
+      },
+      technologies: ["React Native", "Expo", "Expo router", "Firebase", "Gemini Api", "Node.js"],
+      demoLink: "https://www.canva.com/design/DAHKAR4yovA/SKCyvyc3DWORZwwBS67puQ/edit?ui=e30",
+      githubLink: "https://github.com/davidstef77/mathmind"
     }
   ];
-
-  const sections = [
-    { id: 'hero', title: 'Hero' },
-    { id: 'about', title: 'About' },
-    ...projects.map(p => ({ id: `project-${p.id}`, title: p.title })),
-    { id: 'contact', title: 'Contact' }
-  ];
-
-  const nextSection = () => {
-    setCurrentSection((prev) => (prev + 1) % sections.length);
-  };
-
-  const prevSection = () => {
-    setCurrentSection((prev) => (prev - 1 + sections.length) % sections.length);
-  };
-
-  const renderSection = () => {
-    const section = sections[currentSection];
-    
-    if (section.id === 'hero') {
-      return (
-        <div className="min-h-screen flex items-center justify-center px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="mb-12">
-              <Image
-                src={davidImg}
-                alt="David"
-                className="rounded-full mx-auto mb-8 border-4 border-blue-400 shadow-2xl hover:scale-105 transition-all duration-500"
-                width={200}
-                height={200}
-                priority
-              />
-            </div>
-            <h1 className={`text-6xl md:text-8xl font-bold mb-8 ${spaceGrotesk.className}`}>
-              {t('hero.greeting')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">{t('hero.name')}</span>
-            </h1>
-            <p className="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
-              {t('hero.title')}
-            </p>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              {t('hero.subtitle')}
-            </p>
-          </div>
-        </div>
-      );
-    }
-    
-    if (section.id === 'about') {
-      return (
-        <div className="min-h-screen flex items-center justify-center px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className={`text-5xl md:text-7xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 ${spaceGrotesk.className}`}>
-              {t('about.title')}
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8">
-              {t('about.description')}
-            </p>
-            <p className="text-lg text-gray-400 leading-relaxed">
-              {t('about.passion')}
-            </p>
-          </div>
-        </div>
-      );
-    }
-    
-    if (section.id.startsWith('project-')) {
-      const projectId = parseInt(section.id.split('-')[1]);
-      const project = projects.find(p => p.id === projectId);
-      if (!project) return null;
-      
-      return (
-        <div className="min-h-screen flex items-center justify-center px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="text-8xl mb-8">{project.emoji}</div>
-            <h2 className={`text-4xl md:text-6xl font-bold mb-8 text-white ${spaceGrotesk.className}`}>
-              {project.title}
-            </h2>
-            <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-              {project.description[language]}
-            </p>
-            
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-xl font-semibold mb-4 text-blue-400">Features</h3>
-                <ul className="text-gray-300 space-y-2">
-                  {project.features[language].map((feature: string, index: number) => (
-                    <li key={index} className="text-sm">{feature}</li>
-                  ))}
-                </ul>
-              </div>
-              
-              <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-800">
-                <h3 className="text-xl font-semibold mb-4 text-cyan-400">Technologies</h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech: string, index: number) => (
-                    <span key={index} className="bg-blue-600/20 text-blue-300 px-3 py-1 rounded-full text-sm">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={project.demoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-              >
-                <FaLink /> {t('projects.demo')}
-              </a>
-              <a
-                href={project.githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border-2 border-gray-600 text-gray-300 hover:border-gray-400 hover:text-white px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-              >
-                <FaGithub /> {t('projects.code')}
-              </a>
-            </div>
-          </div>
-        </div>
-      );
-    }
-    
-    if (section.id === 'contact') {
-      return (
-        <div className="min-h-screen flex items-center justify-center px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className={`text-5xl md:text-7xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 ${spaceGrotesk.className}`}>
-              {t('contact.title')}
-            </h2>
-            <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-              {t('contact.description')}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a
-                href="mailto:dstef068@gmail.com"
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-              >
-                <FaEnvelope /> {t('contact.email')}
-              </a>
-              <a
-                href="tel:+40770877011"
-                className="inline-flex items-center gap-3 border-2 border-gray-600 text-gray-300 hover:border-gray-400 hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-              >
-                <FaPhone /> {t('contact.phone')}
-              </a>
-            </div>
-          </div>
-        </div>
-      );
-    }
-  };
 
   return (
-    <main className={`bg-black text-white min-h-screen ${inter.className}`}>
-      {renderSection()}
-      
-      {/* Navigation Controls */}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4 bg-gray-900/80 backdrop-blur-md rounded-full px-6 py-3 border border-gray-700">
-        <button
-          onClick={prevSection}
-          className="p-2 text-gray-400 hover:text-white transition-colors"
-          disabled={currentSection === 0}
-        >
-          <FaArrowUp />
-        </button>
-        
-        <div className="flex gap-2">
-          {sections.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSection(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === currentSection ? 'bg-blue-400 w-8' : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-            />
-          ))}
-        </div>
-        
-        <button
-          onClick={nextSection}
-          className="p-2 text-gray-400 hover:text-white transition-colors"
-          disabled={currentSection === sections.length - 1}
-        >
-          <FaArrowDown />
-        </button>
+    <main className={`bg-[#05070e] text-white min-h-screen ${inter.className} selection:bg-blue-500/30 relative overflow-x-clip`}>
+      {/* Ambient Global Background Effects */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px]" />
+        <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 left-10 w-[600px] h-[600px] bg-cyan-600/10 rounded-full blur-[140px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:32px_32px] opacity-40" />
       </div>
+
+      {/* Hero Section */}
+      <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-16 pb-8 sm:pt-20 sm:pb-0 overflow-hidden z-10">
+        {/* Subtle background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-center max-w-5xl mx-auto z-10 w-full"
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+            className="mb-5 sm:mb-10 relative inline-block"
+          >
+            <div className="absolute inset-0 bg-blue-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
+            <Image
+              src={davidImg}
+              alt="David"
+              className="rounded-full relative border border-white/10 shadow-2xl hover:scale-105 transition-transform duration-500"
+              width={120}
+              height={120}
+              priority
+              sizes="(max-width: 640px) 120px, 160px"
+              style={{ width: 'clamp(100px, 22vw, 160px)', height: 'clamp(100px, 22vw, 160px)' }}
+            />
+          </motion.div>
+          <h1 className={`text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-3 sm:mb-6 tracking-tight ${spaceGrotesk.className}`}>
+            {t('hero.greeting')} <br className="md:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+              {t('hero.name')}
+            </span>
+          </h1>
+          <p className="text-base sm:text-xl md:text-3xl text-gray-400 mb-3 sm:mb-6 font-light max-w-3xl mx-auto">
+            {t('hero.title')}
+          </p>
+          <p className="text-sm sm:text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-3 sm:mb-10 leading-relaxed">
+            {t('hero.subtitle')}
+          </p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pb-12 sm:pb-0"
+          >
+            <a href="#projects" className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors shadow-[0_0_40px_rgba(255,255,255,0.2)] text-sm sm:text-base">
+              {t('projects.title')}
+            </a>
+            <a href="#contact" className="px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors text-sm sm:text-base">
+              {t('nav.contact')}
+            </a>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* About Section with Unique Background & Scroll Traversing Animations */}
+      <section 
+        id="about" 
+        ref={aboutRef}
+        className="py-36 px-6 relative overflow-hidden z-10 border-y border-cyan-500/20 bg-gradient-to-br from-slate-950 via-indigo-950/40 to-slate-950 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+      >
+        {/* Background Grid Pattern Specific to About Section */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293720_1px,transparent_1px),linear-gradient(to_bottom,#1f293720_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+
+        {/* Scroll-Triggered Traversing Beams & Orbs */}
+        <motion.div 
+          style={{ x: traverseX1, scale: traverseScale }}
+          className="absolute top-1/4 left-0 w-[500px] h-32 bg-gradient-to-r from-transparent via-cyan-400/30 to-blue-600/40 rounded-full blur-2xl pointer-events-none z-0"
+        />
+        <motion.div 
+          style={{ x: traverseX1 }}
+          className="absolute top-1/4 left-0 w-96 h-[3px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_25px_#06b6d4] pointer-events-none z-0"
+        />
+
+        <motion.div 
+          style={{ x: traverseX2, rotate: traverseRotate }}
+          className="absolute bottom-1/4 right-0 w-[600px] h-40 bg-gradient-to-r from-purple-500/30 via-indigo-500/30 to-transparent rounded-full blur-3xl pointer-events-none z-0"
+        />
+        <motion.div 
+          style={{ x: traverseX2 }}
+          className="absolute bottom-1/4 right-0 w-96 h-[3px] bg-gradient-to-r from-purple-400 via-pink-400 to-transparent shadow-[0_0_25px_#ec4899] pointer-events-none z-0"
+        />
+
+        {/* Content Card with Glassmorphic backdrop */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center relative z-10 p-8 md:p-14 rounded-3xl bg-slate-900/60 border border-cyan-500/20 backdrop-blur-xl shadow-2xl"
+        >
+          <h2 className={`text-4xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 ${spaceGrotesk.className}`}>
+            {t('about.title')}
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-200 leading-relaxed mb-8 font-light">
+            {t('about.description')}
+          </p>
+          <p className="text-lg md:text-xl text-gray-400 leading-relaxed font-light">
+            {t('about.passion')}
+          </p>
+        </motion.div>
+      </section>
+
+      {/* Projects Pinned Stacking Section */}
+      <section id="projects" ref={projectsRef} className="relative h-[240vh] z-10">
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center px-4 overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-6 md:mb-10 text-center"
+          >
+            <h2 className={`text-4xl sm:text-6xl md:text-7xl font-bold ${spaceGrotesk.className}`}>
+              {t('projects.title')}
+            </h2>
+          </motion.div>
+          
+          <div className="relative w-full max-w-5xl h-[520px] md:h-[580px]">
+            {projects.map((project, i) => (
+              <motion.div
+                key={project.id}
+                style={{
+                  y: cardTransforms[i].y,
+                  scale: cardTransforms[i].scale,
+                  opacity: cardTransforms[i].opacity,
+                  zIndex: i + 1
+                }}
+                className={`absolute inset-0 shadow-[0_30px_80px_rgba(0,0,0,0.95)] rounded-[2.5rem] p-6 sm:p-8 md:p-12 overflow-hidden bg-gradient-to-br ${project.cardGradient} border ${project.border} backdrop-blur-2xl flex flex-col md:flex-row gap-6 md:gap-8 items-center group transition-all duration-300`}
+              >
+                {/* Background glowing aura & mesh texture */}
+                <div className={`absolute -top-32 -right-32 w-[450px] h-[450px] bg-gradient-to-br ${project.glow} rounded-full blur-[100px] pointer-events-none group-hover:scale-125 transition-transform duration-700`} />
+                <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-50" />
+                <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${project.accentGradient}`} />
+                
+                <div className="w-full md:w-5/12 flex justify-center z-10">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.appleEmoji}
+                    alt={project.title}
+                    className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain transform hover:scale-110 hover:-rotate-6 transition-transform duration-500 origin-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
+                  />
+                </div>
+                
+                <div className="relative z-10 w-full md:w-7/12 flex flex-col h-full justify-center">
+                  <h3 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 ${spaceGrotesk.className}`}>
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-200 mb-6 md:mb-10 text-base sm:text-lg md:text-xl font-light leading-relaxed">
+                    {project.description[language]}
+                  </p>
+                  
+                  <div className="mt-auto space-y-6 md:space-y-8">
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech, idx) => (
+                        <span key={idx} className={`px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold rounded-full border shadow-inner ${project.badgeStyle}`}>
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 pt-4 md:pt-8 border-t border-white/10">
+                      <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r ${project.accentGradient} text-white rounded-full text-sm sm:text-base font-bold hover:opacity-90 transition-all w-full sm:w-auto shadow-lg hover:shadow-cyan-500/25`}>
+                        <FaLink /> {t('projects.demo')}
+                      </a>
+                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border border-white/20 text-white rounded-full text-sm sm:text-base font-bold hover:bg-white/10 transition-all w-full sm:w-auto">
+                        <FaGithub /> {t('projects.code')}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-32 px-6 relative z-10 border-t border-white/5 bg-gradient-to-b from-[#05070e] to-blue-950/30">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <h2 className={`text-5xl md:text-7xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 ${spaceGrotesk.className}`}>
+            {t('contact.title')}
+          </h2>
+          <p className="text-xl text-gray-400 mb-12 font-light">
+            {t('contact.description')}
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <a
+              href="mailto:dstef068@gmail.com"
+              className="inline-flex items-center justify-center gap-3 bg-white text-black px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]"
+            >
+              <FaEnvelope /> {t('contact.email')}
+            </a>
+            <a
+              href="tel:+40770877011"
+              className="inline-flex items-center justify-center gap-3 border border-white/20 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all"
+            >
+              <FaPhone /> {t('contact.phone')}
+            </a>
+          </div>
+        </motion.div>
+      </section>
+      
     </main>
   );
 }
