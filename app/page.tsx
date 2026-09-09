@@ -24,7 +24,7 @@ export default function Home() {
   const traverseScale = useTransform(aboutScrollProgress, [0, 0.5, 1], [0.6, 1.2, 0.6]);
   const traverseRotate = useTransform(aboutScrollProgress, [0, 1], [0, 180]);
 
-  const projectsRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: projectsProgress } = useScroll({
     target: projectsRef,
     offset: ["start start", "end end"]
