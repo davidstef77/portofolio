@@ -17,11 +17,12 @@ const translations = {
     'nav.contact': 'Contact',
     
     // Hero Section
-    'hero.greeting': 'Hello! I\'m',
+    'hero.greeting': "Hey, I'm",
     'hero.name': 'David',
-    'hero.title': 'Full-Stack Developer',
-    'hero.subtitle': 'Passionate about creating functional and scalable digital experiences',
-    'hero.cta': 'View My Work',
+    'hero.badge': '🚀 Full-Stack Developer & Innovator',
+    'hero.title': 'Building Next-Gen Digital Products & Scalable Web Apps',
+    'hero.subtitle': 'Crafting sleek interfaces, high-performance web applications, and intelligent AI-driven solutions.',
+    'hero.cta': 'Explore Projects',
     
     // About Section
     'about.title': 'About Me',
@@ -51,9 +52,10 @@ const translations = {
     // Hero Section
     'hero.greeting': 'Salut! Sunt',
     'hero.name': 'David',
-    'hero.title': 'Dezvoltator Full-Stack',
-    'hero.subtitle': 'Pasionat de crearea de experiențe digitale funcționale și scalabile',
-    'hero.cta': 'Vezi Proiectele Mele',
+    'hero.badge': '🚀 Full-Stack Developer & Inovator',
+    'hero.title': 'Construiesc Aplicații Web Scalabile și Produse Digitale Moderne',
+    'hero.subtitle': 'Transform idei complexe în aplicații rapide, interfețe elegante și soluții bazate pe inteligență artificială.',
+    'hero.cta': 'Explorează Proiectele',
     
     // About Section
     'about.title': 'Despre Mine',

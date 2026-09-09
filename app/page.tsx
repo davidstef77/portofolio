@@ -179,57 +179,81 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 pt-16 pb-8 sm:pt-20 sm:pb-0 overflow-hidden z-10">
+      <section id="hero" className="relative min-h-[90vh] sm:min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-16 overflow-hidden z-10">
         {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[900px] h-[600px] sm:h-[900px] bg-gradient-to-tr from-blue-600/20 via-cyan-500/15 to-purple-600/20 blur-[130px] rounded-full pointer-events-none"></div>
         
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center max-w-5xl mx-auto z-10 w-full"
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="text-center max-w-5xl mx-auto z-10 w-full flex flex-col items-center justify-center"
         >
+          {/* Avatar Profile */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-            className="mb-5 sm:mb-10 relative inline-block"
+            className="mb-6 relative inline-block"
           >
-            <div className="absolute inset-0 bg-blue-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 rounded-full blur-lg opacity-60 animate-pulse"></div>
             <Image
               src={davidImg}
               alt="David"
-              className="rounded-full relative border border-white/10 shadow-2xl hover:scale-105 transition-transform duration-500"
-              width={120}
-              height={120}
+              className="rounded-full relative border-2 border-white/20 shadow-2xl hover:scale-105 transition-transform duration-500 object-cover"
+              width={140}
+              height={140}
               priority
               sizes="(max-width: 640px) 120px, 160px"
-              style={{ width: 'clamp(100px, 22vw, 160px)', height: 'clamp(100px, 22vw, 160px)' }}
+              style={{ width: 'clamp(110px, 18vw, 150px)', height: 'clamp(110px, 18vw, 150px)' }}
             />
           </motion.div>
-          <h1 className={`text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-3 sm:mb-6 tracking-tight ${spaceGrotesk.className}`}>
-            {t('hero.greeting')} <br className="md:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+
+          {/* Eye-catching Animated Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-300 text-xs sm:text-sm font-medium backdrop-blur-md shadow-lg shadow-blue-500/10"
+          >
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            <span>{t('hero.badge')}</span>
+          </motion.div>
+
+          {/* Main Hero Headline */}
+          <h1 className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight leading-[1.1] ${spaceGrotesk.className}`}>
+            {t('hero.greeting')}{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-400 drop-shadow-sm">
               {t('hero.name')}
             </span>
           </h1>
-          <p className="text-base sm:text-xl md:text-3xl text-gray-400 mb-3 sm:mb-6 font-light max-w-3xl mx-auto">
+
+          {/* Hero Sub-titles with enlarged sizes */}
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-slate-200 to-gray-400 mb-6 font-semibold max-w-4xl mx-auto leading-snug px-2">
             {t('hero.title')}
           </p>
-          <p className="text-sm sm:text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-3 sm:mb-10 leading-relaxed">
+
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-light px-4">
             {t('hero.subtitle')}
           </p>
           
+          {/* Action Call-To-Action Buttons */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pb-12 sm:pb-0"
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full sm:w-auto"
           >
-            <a href="#projects" className="px-6 sm:px-8 py-3 sm:py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors shadow-[0_0_40px_rgba(255,255,255,0.2)] text-sm sm:text-base">
-              {t('projects.title')}
+            <a 
+              href="#projects" 
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-[0_0_30px_rgba(6,182,212,0.4)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transform hover:-translate-y-0.5 text-base sm:text-lg"
+            >
+              {t('hero.cta')}
             </a>
-            <a href="#contact" className="px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors text-sm sm:text-base">
+            <a 
+              href="#contact" 
+              className="w-full sm:w-auto px-8 py-4 rounded-full border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300 text-base sm:text-lg font-semibold transform hover:-translate-y-0.5"
+            >
               {t('nav.contact')}
             </a>
           </motion.div>
@@ -285,21 +309,21 @@ export default function Home() {
       </section>
 
       {/* Projects Pinned Stacking Section */}
-      <section id="projects" ref={projectsRef} className="relative h-[240vh] z-10">
+      <section id="projects" ref={projectsRef} className="relative h-[220vh] z-10">
         <div className="sticky top-0 h-screen w-full flex flex-col justify-center items-center px-4 overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mb-6 md:mb-10 text-center"
+            transition={{ duration: 0.6 }}
+            className="mb-4 sm:mb-8 text-center"
           >
             <h2 className={`text-4xl sm:text-6xl md:text-7xl font-bold ${spaceGrotesk.className}`}>
               {t('projects.title')}
             </h2>
           </motion.div>
           
-          <div className="relative w-full max-w-5xl h-[520px] md:h-[580px]">
+          <div className="relative w-full max-w-5xl h-[520px] md:h-[560px]">
             {projects.map((project, i) => (
               <motion.div
                 key={project.id}
@@ -307,13 +331,14 @@ export default function Home() {
                   y: cardTransforms[i].y,
                   scale: cardTransforms[i].scale,
                   opacity: cardTransforms[i].opacity,
-                  zIndex: i + 1
+                  zIndex: i + 1,
+                  willChange: "transform, opacity"
                 }}
-                className={`absolute inset-0 shadow-[0_30px_80px_rgba(0,0,0,0.95)] rounded-[2.5rem] p-6 sm:p-8 md:p-12 overflow-hidden bg-gradient-to-br ${project.cardGradient} border ${project.border} backdrop-blur-2xl flex flex-col md:flex-row gap-6 md:gap-8 items-center group transition-all duration-300`}
+                className={`absolute inset-0 shadow-[0_20px_60px_rgba(0,0,0,0.8)] rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-12 overflow-hidden bg-gradient-to-br ${project.cardGradient} border ${project.border} backdrop-blur-md flex flex-col md:flex-row gap-6 md:gap-8 items-center group transition-all duration-300 transform-gpu`}
               >
                 {/* Background glowing aura & mesh texture */}
-                <div className={`absolute -top-32 -right-32 w-[450px] h-[450px] bg-gradient-to-br ${project.glow} rounded-full blur-[100px] pointer-events-none group-hover:scale-125 transition-transform duration-700`} />
-                <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-50" />
+                <div className={`absolute -top-32 -right-32 w-[350px] sm:w-[450px] h-[350px] sm:h-[450px] bg-gradient-to-br ${project.glow} rounded-full blur-[80px] pointer-events-none group-hover:scale-110 transition-transform duration-500`} />
+                <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none opacity-40" />
                 <div className={`absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-r ${project.accentGradient}`} />
                 
                 <div className="w-full md:w-5/12 flex justify-center z-10">
@@ -321,32 +346,32 @@ export default function Home() {
                   <img
                     src={project.appleEmoji}
                     alt={project.title}
-                    className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain transform hover:scale-110 hover:-rotate-6 transition-transform duration-500 origin-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)]"
+                    className="w-24 h-24 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain transform hover:scale-105 transition-transform duration-300 origin-center drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
                   />
                 </div>
                 
                 <div className="relative z-10 w-full md:w-7/12 flex flex-col h-full justify-center">
-                  <h3 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 ${spaceGrotesk.className}`}>
+                  <h3 className={`text-2xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-5 ${spaceGrotesk.className}`}>
                     {project.title}
                   </h3>
-                  <p className="text-gray-200 mb-6 md:mb-10 text-base sm:text-lg md:text-xl font-light leading-relaxed">
+                  <p className="text-gray-200 mb-4 md:mb-8 text-sm sm:text-base md:text-lg font-light leading-relaxed">
                     {project.description[language]}
                   </p>
                   
-                  <div className="mt-auto space-y-6 md:space-y-8">
+                  <div className="mt-auto space-y-4 md:space-y-6">
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, idx) => (
-                        <span key={idx} className={`px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold rounded-full border shadow-inner ${project.badgeStyle}`}>
+                        <span key={idx} className={`px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-semibold rounded-full border shadow-inner ${project.badgeStyle}`}>
                           {tech}
                         </span>
                       ))}
                     </div>
                     
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 pt-4 md:pt-8 border-t border-white/10">
-                      <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r ${project.accentGradient} text-white rounded-full text-sm sm:text-base font-bold hover:opacity-90 transition-all w-full sm:w-auto shadow-lg hover:shadow-cyan-500/25`}>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 pt-4 md:pt-6 border-t border-white/10">
+                      <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-gradient-to-r ${project.accentGradient} text-white rounded-full text-sm sm:text-base font-bold hover:opacity-90 transition-all w-full sm:w-auto shadow-lg hover:shadow-cyan-500/25`}>
                         <FaLink /> {t('projects.demo')}
                       </a>
-                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border border-white/20 text-white rounded-full text-sm sm:text-base font-bold hover:bg-white/10 transition-all w-full sm:w-auto">
+                      <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 border border-white/20 text-white rounded-full text-sm sm:text-base font-bold hover:bg-white/10 transition-all w-full sm:w-auto">
                         <FaGithub /> {t('projects.code')}
                       </a>
                     </div>
