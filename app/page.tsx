@@ -316,7 +316,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section with Unique Background & Scroll Traversing Animations */}
+      {/* About Section with Unique Background */}
       <section 
         id="about" 
         ref={aboutRef}
@@ -325,40 +325,36 @@ export default function Home() {
         {/* Background Grid Pattern Specific to About Section */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293720_1px,transparent_1px),linear-gradient(to_bottom,#1f293720_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
 
-        {/* Scroll-Triggered Traversing Beams & Orbs */}
-        <motion.div 
-          style={{ x: traverseX1, scale: traverseScale }}
-          className="absolute top-1/4 left-0 w-[500px] h-32 bg-gradient-to-r from-transparent via-cyan-400/30 to-blue-600/40 rounded-full blur-2xl pointer-events-none z-0"
-        />
-        <motion.div 
-          style={{ x: traverseX1 }}
-          className="absolute top-1/4 left-0 w-96 h-[3px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_25px_#06b6d4] pointer-events-none z-0"
-        />
+        {/* Desktop-only Scroll-Triggered Traversing Beams & Orbs */}
+        <div className="hidden md:block">
+          <motion.div 
+            style={{ x: traverseX1, scale: traverseScale }}
+            className="absolute top-1/4 left-0 w-[500px] h-32 bg-gradient-to-r from-transparent via-cyan-400/30 to-blue-600/40 rounded-full blur-2xl pointer-events-none z-0"
+          />
+          <motion.div 
+            style={{ x: traverseX1 }}
+            className="absolute top-1/4 left-0 w-96 h-[3px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_25px_#06b6d4] pointer-events-none z-0"
+          />
 
-        <motion.div 
-          style={{ x: traverseX2, rotate: traverseRotate }}
-          className="absolute bottom-1/4 right-0 w-[600px] h-40 bg-gradient-to-r from-purple-500/30 via-indigo-500/30 to-transparent rounded-full blur-3xl pointer-events-none z-0"
-        />
-        <motion.div 
-          style={{ x: traverseX2 }}
-          className="absolute bottom-1/4 right-0 w-96 h-[3px] bg-gradient-to-r from-purple-400 via-pink-400 to-transparent shadow-[0_0_25px_#ec4899] pointer-events-none z-0"
-        />
+          <motion.div 
+            style={{ x: traverseX2, rotate: traverseRotate }}
+            className="absolute bottom-1/4 right-0 w-[600px] h-40 bg-gradient-to-r from-purple-500/30 via-indigo-500/30 to-transparent rounded-full blur-3xl pointer-events-none z-0"
+          />
+          <motion.div 
+            style={{ x: traverseX2 }}
+            className="absolute bottom-1/4 right-0 w-96 h-[3px] bg-gradient-to-r from-purple-400 via-pink-400 to-transparent shadow-[0_0_25px_#ec4899] pointer-events-none z-0"
+          />
+        </div>
 
         {/* Content Card with Glassmorphic backdrop */}
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center relative z-10 p-8 md:p-14 rounded-3xl bg-slate-900/60 border border-cyan-500/20 backdrop-blur-xl shadow-2xl"
-        >
+        <div className="max-w-3xl mx-auto text-center relative z-10 p-8 md:p-14 rounded-3xl bg-slate-900/60 border border-cyan-500/20 backdrop-blur-xl shadow-2xl">
           <h2 className={`text-4xl md:text-6xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 ${spaceGrotesk.className}`}>
             {t('about.title')}
           </h2>
           <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light">
             {t('about.paragraph')}
           </p>
-        </motion.div>
+        </div>
       </section>
 
       {/* Projects Section — sticky on desktop, simple list on mobile */}
@@ -437,28 +433,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile: Simple vertical list */}
+        {/* Mobile: Simple vertical list without animations */}
         <div className="md:hidden px-4 py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-10 text-center"
-          >
+          <div className="mb-10 text-center">
             <h2 className={`text-4xl font-bold ${spaceGrotesk.className}`}>
               {t('projects.title')}
             </h2>
-          </motion.div>
+          </div>
 
           <div className="flex flex-col gap-6">
-            {projects.map((project, i) => (
-              <motion.div
+            {projects.map((project) => (
+              <div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
                 className={`rounded-2xl p-6 overflow-hidden bg-gradient-to-br ${project.cardGradient} border ${project.border} relative`}
               >
                 <div className={`absolute -top-20 -right-20 w-[200px] h-[200px] bg-gradient-to-br ${project.glow} rounded-full blur-[60px] pointer-events-none`} />
@@ -490,7 +476,7 @@ export default function Home() {
                     <FaGithub size={12} /> {t('projects.code')}
                   </a>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
