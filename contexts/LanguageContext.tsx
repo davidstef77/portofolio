@@ -20,14 +20,13 @@ const translations = {
     'hero.greeting': "Hey, I'm",
     'hero.name': 'David',
     'hero.badge': '🚀 Full-Stack Developer & Innovator',
-    'hero.title': 'Building Next-Gen Digital Products & Scalable Web Apps',
-    'hero.subtitle': 'Crafting sleek interfaces, high-performance web applications, and intelligent AI-driven solutions.',
+    'hero.subtitle': 'Transform complex ideas into fast apps, elegant interfaces, and AI-powered solutions.',
+    'hero.chips': 'Web Apps | Mobile Apps | AI Solutions | Full-Stack | Video Editing',
     'hero.cta': 'Explore Projects',
     
     // About Section
     'about.title': 'About Me',
-    'about.description': 'I\'m a dedicated developer with a passion for clean code and intuitive interfaces.',
-    'about.passion': 'I believe in continuous learning. Every project is an opportunity to grow and exceed expectations.',
+    'about.paragraph': "I'm a dedicated Full-Stack developer with a passion for clean code, intuitive interfaces, and AI-driven solutions — every project is an opportunity to grow and exceed expectations.",
     
     // Projects Section
     'projects.title': 'My Projects',
@@ -42,6 +41,16 @@ const translations = {
     'contact.description': 'Let\'s build something amazing together! Send me a message anytime. I\'m open to collaborations and new opportunities.',
     'contact.email': 'Send Email',
     'contact.phone': 'Call Me',
+    
+    // Other Work Section
+    'other.title': 'Other Work',
+    'other.subtitle': 'Beyond code — video production, automation scripts, and creative side projects.',
+    'other.youtube.title': 'Video Editing & YouTube',
+    'other.youtube.description': 'I create and edit videos on my YouTube channel, combining storytelling with visual effects and motion graphics.',
+    'other.youtube.cta': 'Watch on YouTube',
+    'other.python.title': 'Python Automation',
+    'other.python.description': 'Built custom scripts to automate repetitive tasks — from extracting audio timestamps to aligning Google image flows with precise timing.',
+    'other.python.tags': 'Audio Timestamps | Image Alignment | Google Flow | Automation',
   },
   ro: {
     // Navigation
@@ -53,14 +62,13 @@ const translations = {
     'hero.greeting': 'Salut! Sunt',
     'hero.name': 'David',
     'hero.badge': '🚀 Full-Stack Developer & Inovator',
-    'hero.title': 'Construiesc Aplicații Web Scalabile și Produse Digitale Moderne',
     'hero.subtitle': 'Transform idei complexe în aplicații rapide, interfețe elegante și soluții bazate pe inteligență artificială.',
+    'hero.chips': 'Aplicații Web | Aplicații Mobile | Soluții AI | Full-Stack | Video Editing',
     'hero.cta': 'Explorează Proiectele',
     
     // About Section
     'about.title': 'Despre Mine',
-    'about.description': 'Sunt un dezvoltator dedicat, cu o pasiune pentru cod curat și interfețe intuitive.',
-    'about.passion': 'Cred cu tărie în învățarea continuă. Fiecare proiect este o oportunitate de a învăța și de a mă depăși.',
+    'about.paragraph': 'Sunt un dezvoltator Full-Stack dedicat, cu pasiune pentru cod curat, interfețe intuitive și soluții bazate pe inteligență artificială — fiecare proiect este o oportunitate de a mă depăși.',
     
     // Projects Section
     'projects.title': 'Proiectele Mele',
@@ -75,6 +83,16 @@ const translations = {
     'contact.description': 'Hai să construim ceva uimitor împreună! Trimite-mi un mesaj oricând. Sunt deschis la colaborări și noi oportunități.',
     'contact.email': 'Trimite un Email',
     'contact.phone': 'Apelează-mă',
+    
+    // Other Work Section
+    'other.title': 'Alte Proiecte',
+    'other.subtitle': 'Dincolo de cod — producție video, scripturi de automatizare și proiecte creative.',
+    'other.youtube.title': 'Video Editing & YouTube',
+    'other.youtube.description': 'Creez și editez videoclipuri pe canalul meu de YouTube, combinând storytelling cu efecte vizuale și motion graphics.',
+    'other.youtube.cta': 'Vezi pe YouTube',
+    'other.python.title': 'Automatizare Python',
+    'other.python.description': 'Am construit scripturi custom pentru automatizarea task-urilor repetitive — de la extragerea timestamp-urilor audio la alinierea imaginilor din Google Flow cu timing precis.',
+    'other.python.tags': 'Audio Timestamps | Aliniere Imagini | Google Flow | Automatizare',
   }
 };
 
